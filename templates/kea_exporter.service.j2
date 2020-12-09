@@ -1,0 +1,21 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Prometheus kea Exporter
+After=network-online.target
+StartLimitInterval=0
+
+[Service]
+Type=simple
+Restart=always
+ExecStart={{ kea_exporter_install_dir }}/kea-exporter \
+          --address {{ kea_exporter_listen_address }} \
+          --port {{ kea_exporter_listen_port }} \
+          {{ kea_exporter_listen_sock }}
+ExecReload=/bin/kill -HUP $MAINPID
+SyslogIdentifier=kea_exporter
+RestartSec=1
+PrivateTmp=yes
+
+[Install]
+WantedBy=multi-user.target

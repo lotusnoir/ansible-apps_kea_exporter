@@ -1,5 +1,5 @@
 ---
-- name: "restart squid_exporter"
+- name: "restart kea_exporter"
   service:
-    name: "squid_exporter"
+    name: "kea_exporter"
     state: "restarted"
