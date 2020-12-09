@@ -4,7 +4,7 @@
 
 [![Build Status](https://travis-ci.com/lotusnoir/ansible-apps_kea_exporter.svg?branch=master)](https://travis-ci.com/lotusnoir/ansible-apps_kea_exporter)[![License](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)](https://opensource.org/licenses/MIT)[![Ansible Role](https://img.shields.io/badge/ansible%20role-apps__kea_exporter-blue)](https://galaxy.ansible.com/lotusnoir/ansible-apps_kea_exporter/)[![GitHub tag](https://img.shields.io/badge/version-latest-blue)](https://github.com/lotusnoir/ansible-apps_kea_exporter/tags)
 
-Deploy [kea_exporter](https://github.com/boynux/kea-exporter) to expose kea metrics to prometheus.
+Deploy [kea_exporter](https://github.com/mweinelt/kea-exporter) to expose kea metrics to prometheus.
 
 ## Role variables
 
