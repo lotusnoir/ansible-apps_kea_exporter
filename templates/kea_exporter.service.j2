@@ -15,7 +15,6 @@ ExecStart={{ kea_exporter_install_dir }}/kea-exporter \
 ExecReload=/bin/kill -HUP $MAINPID
 SyslogIdentifier=kea_exporter
 RestartSec=1
-PrivateTmp=yes
 
 [Install]
 WantedBy=multi-user.target
