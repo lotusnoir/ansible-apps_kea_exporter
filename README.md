@@ -18,15 +18,15 @@ Deploy [kea_exporter](https://github.com/mweinelt/kea-exporter) to expose kea me
 
 ## Role variables
 
-| Name           | Default Value | Description                        |
-| -------------- | ------------- | -----------------------------------|
-| `kea_exporter_version` | 1.9.1 | kea_exporter version |
-| `kea_exporter_build_dir` | /tmp | temporary directory to uncompress package |
-| `kea_exporter_install_dir` | /usr/local/bin | directory to install binary |
-| `kea_exporter_force_install` | false | force install variable |
-| `kea_exporter_listen_addresst` | 0.0.0.0 | listen address |
-| `kea_exporter_listen_port` | 9125 | port to expose prometheus metrics |
-| `kea_exporter_listen_sock` | /tmp/kea-dhcp4-ctrl.sock | port of the kea service on the kea server |
+| Name                           | Default Value  | Description                        |
+| ------------------------------ | -------------- | -----------------------------------|
+| `kea_exporter_version`         | 1.9.1          | kea_exporter version |
+| `kea_exporter_build_dir`       | /tmp           | temporary directory to uncompress package |
+| `kea_exporter_install_dir`     | /usr/local/bin | directory to install binary |
+| `kea_exporter_force_install`   | false          | force install variable |
+| `kea_exporter_listen_addresst` | 0.0.0.0        | listen address |
+| `kea_exporter_listen_port`     | 9125           | port to expose prometheus metrics |
+| `kea_exporter_listen_sock`     | /tmp/kea-dhcp4-ctrl.sock | port of the kea service on the kea server |
 
 ## Examples
 
@@ -41,6 +41,14 @@ Deploy [kea_exporter](https://github.com/mweinelt/kea-exporter) to expose kea me
 	    http_proxy: "{{ http_proxy }}"
 	    https_proxy: "{{ https_proxy }}"
 	    no_proxy: "{{ no_proxy }}
+
+## Prometheus rules
+
+TODO
+
+## Grafana dashboard
+
+A sample dashboard is available here: [https://grafana.com/grafana/dashboards/13571](https://grafana.com/grafana/dashboards/13571)
 
 ## License
 
