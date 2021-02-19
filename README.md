@@ -48,7 +48,7 @@ TODO
 
 ## Grafana dashboard
 
-A sample dashboard is available here: [https://grafana.com/grafana/dashboards/13571](https://grafana.com/grafana/dashboards/13571)
+A sample dashboard is available here: [https://grafana.com/grafana/dashboards/13925](https://grafana.com/grafana/dashboards/13925)
 
 ## License
 
