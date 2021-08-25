@@ -1,0 +1,67 @@
+---
+- name: "Check for kea_exporter binary"
+  stat:
+    path: '{{ kea_exporter_install_dir }}/kea-exporter'
+  changed_when: false
+  register: kea_exporter_install
+
+- when: not kea_exporter_install.stat.exists or kea_exporter_force_install|bool
+  block:
+    - name: "Install requierements"
+      package:
+        name: "ca-certificates"
+        state: present
+
+    - name: "Download kea_exporter..."
+      get_url:
+        url: '{{ kea_exporter_tgz_url }}'
+        dest: '{{ kea_exporter_build_dir }}/{{ kea_exporter_tgz }}'
+        timeout: '60'
+        mode: '0644'
+
+    - name: "Unarchive kea_exporter..."
+      unarchive:
+        src: '{{ kea_exporter_build_dir }}/{{ kea_exporter_tgz }}'
+        dest: '{{ kea_exporter_build_dir }}'
+        extra_opts: [--strip-components=1]
+        remote_src: true
+        mode: '0644'
+
+    - name: "Ensure directory exists"
+      file:
+        path: '{{ kea_exporter_build_dir }}/build'
+        state: directory
+        mode: '0755'
+
+    # - name: Install requierement
+    #   apt:
+    #     name: python-prometheus-client
+
+    - name: "Build package"
+      pip:
+        name: "."
+        chdir: '{{ kea_exporter_build_dir }}'
+        state: present
+        extra_args: --target {{ kea_exporter_build_dir }}/build/
+        executable: pip3
+
+    - name: "Copy kea_exporter binary..."
+      copy:
+        src: '{{ kea_exporter_build_dir }}/build/bin/kea-exporter'
+        dest: '{{ kea_exporter_install_dir }}/kea-exporter'
+        remote_src: true
+        mode: '0755'
+
+- name: "Create systemd for kea_exporter"
+  template:
+    src: kea_exporter.service.j2
+    dest: /etc/systemd/system/kea_exporter.service
+    mode: '0644'
+  notify: "restart kea_exporter"
+
+- name: "Enable and Start kea_exporter.service"
+  service:
+    name: kea_exporter
+    state: started
+    enabled: true
+    daemon_reload: true

@@ -1,13 +1,13 @@
 ---
 # Binary install
-kea_exporter_version:         "0.4.2"
-kea_exporter_tgz:             "v{{ kea_exporter_version }}.tar.gz"
-kea_exporter_tgz_url:         "https://github.com/lotusnoir/prometheus-kea_exporter/archive/{{ kea_exporter_tgz }}"
-kea_exporter_build_dir:       "/tmp"
-kea_exporter_install_dir:     "/usr/local/bin"
-kea_exporter_force_install:   false
+kea_exporter_version: "0.4.2"
+kea_exporter_tgz: "v{{ kea_exporter_version }}.tar.gz"
+kea_exporter_tgz_url: "https://github.com/lotusnoir/prometheus-kea_exporter/archive/{{ kea_exporter_tgz }}"
+kea_exporter_build_dir: "/tmp"
+kea_exporter_install_dir: "/usr/local/bin"
+kea_exporter_force_install: false
 
 # Systemd options
-kea_exporter_listen_address:  '0.0.0.0'
-kea_exporter_listen_port:     '9125'
-kea_exporter_listen_sock:     '/tmp/kea-dhcp4-ctrl.sock'
+kea_exporter_listen_address: '0.0.0.0'
+kea_exporter_listen_port: '9125'
+kea_exporter_listen_sock: '/tmp/kea-dhcp4-ctrl.sock'
