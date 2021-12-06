@@ -9,7 +9,7 @@
   block:
     - name: "Install requierements"
       package:
-        name: "ca-certificates"
+        name: "{{ kea_exporter_requirements }}"
         state: present
 
     - name: "Download kea_exporter..."

@@ -1,0 +1,4 @@
+---
+kea_exporter_requirements:
+  - ca-certificates
+  - python-setuptools
