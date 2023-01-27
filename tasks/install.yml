@@ -1,26 +1,27 @@
 ---
 - name: "Check for kea_exporter binary"
-  stat:
+  ansible.builtin.stat:
     path: '{{ kea_exporter_install_dir }}/kea-exporter'
   changed_when: false
   register: kea_exporter_install
 
-- when: not kea_exporter_install.stat.exists or kea_exporter_force_install|bool
+- name: "Install tasks"
+  when: not kea_exporter_install.stat.exists or kea_exporter_force_install|bool
   block:
     - name: "Install requierements"
-      package:
+      ansible.builtin.package:
         name: "{{ kea_exporter_requirements }}"
         state: present
 
     - name: "Download kea_exporter..."
-      get_url:
+      ansible.builtin.get_url:
         url: '{{ kea_exporter_tgz_url }}'
         dest: '{{ kea_exporter_build_dir }}/{{ kea_exporter_tgz }}'
         timeout: '60'
         mode: '0644'
 
     - name: "Unarchive kea_exporter..."
-      unarchive:
+      ansible.builtin.unarchive:
         src: '{{ kea_exporter_build_dir }}/{{ kea_exporter_tgz }}'
         dest: '{{ kea_exporter_build_dir }}'
         extra_opts: [--strip-components=1]
@@ -28,7 +29,7 @@
         mode: '0644'
 
     - name: "Ensure directory exists"
-      file:
+      ansible.builtin.file:
         path: '{{ kea_exporter_build_dir }}/build'
         state: directory
         mode: '0755'
@@ -38,7 +39,7 @@
     #     name: python-prometheus-client
 
     - name: "Build package"
-      pip:
+      ansible.builtin.pip:
         name: "."
         chdir: '{{ kea_exporter_build_dir }}'
         state: present
@@ -46,21 +47,21 @@
         executable: pip3
 
     - name: "Copy kea_exporter binary..."
-      copy:
+      ansible.builtin.copy:
         src: '{{ kea_exporter_build_dir }}/build/bin/kea-exporter'
         dest: '{{ kea_exporter_install_dir }}/kea-exporter'
         remote_src: true
         mode: '0755'
 
 - name: "Create systemd for kea_exporter"
-  template:
+  ansible.builtin.template:
     src: kea_exporter.service.j2
     dest: /etc/systemd/system/kea_exporter.service
     mode: '0644'
   notify: "restart kea_exporter"
 
 - name: "Enable and Start kea_exporter.service"
-  service:
+  ansible.builtin.service:
     name: kea_exporter
     state: started
     enabled: true

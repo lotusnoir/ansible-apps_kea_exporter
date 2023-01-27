@@ -1,3 +1,5 @@
 ---
 kea_exporter_requirements:
   - ca-certificates
+  - unzip
+  - tar
