@@ -58,7 +58,7 @@
     src: kea_exporter.service.j2
     dest: /etc/systemd/system/kea_exporter.service
     mode: '0644'
-  notify: "restart kea_exporter"
+  notify: "Restart kea_exporter"
 
 - name: "Enable and Start kea_exporter.service"
   ansible.builtin.service:

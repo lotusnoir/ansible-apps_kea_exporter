@@ -1,5 +1,5 @@
 ---
-- name: "restart kea_exporter"
+- name: "Restart kea_exporter"
   ansible.builtin.service:
     name: "kea_exporter"
     state: "restarted"
