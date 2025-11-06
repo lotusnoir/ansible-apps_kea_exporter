@@ -22,6 +22,7 @@
 ## Description
 
 Deploy [kea_exporter]() to expose kea dhcp server metrics
+
 ## Requirements
 
 none
